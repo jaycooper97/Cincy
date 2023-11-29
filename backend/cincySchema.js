@@ -14,8 +14,31 @@ const cincySchema = new Schema ({
         required: true
     },
 
+    address: {
+        type: String,
+        required: true
+    },
 
-})
+    hours: {
+        type: String,
+        required: false
+    },
+
+    number: {
+        type: Number,
+        required: false
+    },
+
+    rating: {
+        type: Number,
+        required: true
+    },
+
+    pricing: {
+        type: Number,
+        required: false
+    }
+});
 
 
 module.exports = mongoose.model('Cincy', cincySchema);
