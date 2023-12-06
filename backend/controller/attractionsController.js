@@ -31,9 +31,9 @@ const getAttraction = async (req, res) => {
 
 
 
-//create a new workout
+//create a new attraction
 const createAttraction = async (req,res) =>{
-    const {name, description, address, hours, number, rating, pricing, category} = req.body
+    const {name, description, reservation, address, hours, happy, number, rating, website, seating, events, shop, subscription, serving, kitchen, giftCards, travelersChoice, pricing, category} = req.body
 
 
     let emptyFields = []
@@ -46,6 +46,10 @@ const createAttraction = async (req,res) =>{
         emptyFields.push('description')
     }
 
+    if(!reservation) {
+        emptyFields.push('reservation')
+    }
+
     if(!address) {
         emptyFields.push('address')
     }
@@ -54,12 +58,52 @@ const createAttraction = async (req,res) =>{
         emptyFields.push('hours')
     }
 
+    if(!happy) {
+        emptyFields.push('happy')
+    }
+
     if(!number) {
         emptyFields.push('number')
     }
 
     if(!rating) {
         emptyFields.push('rating')
+    }
+
+    if(!website) {
+        emptyFields.push('website')
+    }
+
+    if(!seating) {
+        emptyFields.push('seating')
+    }
+
+    if(!events) {
+        emptyFields.push('events')
+    }
+
+    if(!shop) {
+        emptyFields.push('shop')
+    }
+
+    if(!subscription) {
+        emptyFields.push('subscription')
+    }
+
+    if(!serving) {
+        emptyFields.push('serving')
+    }
+
+    if(!kitchen) {
+        emptyFields.push('kitchen')
+    }
+
+    if(!giftCards) {
+        emptyFields.push('giftCards')
+    }
+
+    if(!travelersChoice) {
+        emptyFields.push('travelersChoice')
     }
 
     if(!pricing) {
