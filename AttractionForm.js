@@ -10,21 +10,31 @@ const AttractionForm = () => {
     const [description, setDescription] = useState('')
     const [address, setAddress] = useState('')
     const [hours, setHours] = useState('')
+    const [happy, setHappy] = useState('')
+    const [kitchen, setKitchen] = useState('')
     const [number, setNumber] = useState('')
     const [rating, setRating] = useState('')
+    const [website, setWebsite] = useState('')    //events
+    const [seating, setSeating] = useState('')
+    const [shop, setShop] = useState('')
+    const [subscription, setSubscription] = useState('')
+    const [serving, setServing] = useState('')
+    const [giftCards, setGiftCards] = useState('')
+    const [travelersChoice, setTravelersChoice] = useState('')
     const [pricing, setPricing] = useState('')
     const [category, setCategory] = useState('')
+    const [imgURL, setImgURL] = useState('')
     const [error, setError] = useState(null)
-    const [emptyFields, setEmptyFields] =nuseState([])
+    const [emptyFields, setEmptyFields] = useState([])
 
     //submission handler
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const attraction = { name, description, address, hours, number, rating, pricing, category }
+        const attraction = { name, description, address, hours, happy, kitchen, number, rating, website, seating, shop, subscription, serving, giftCards, travelersChoice, pricing, category, imgURL }
 
         //post request
-        const response = await fetch('/cincy', {
+        const response = await fetch('http://localhost:4000/attractions', {
             method: 'POST',
             body: JSON.stringify(attraction), headers: {
                 'Content-Type': 'application/json'
@@ -32,24 +42,34 @@ const AttractionForm = () => {
         })
         const json = await response.json()
 
-        if(!response.ok) {
+        if (!response.ok) {
             setError(json.error)
             setEmptyFields(json.emptyFields)
         }
 
-        if(response.ok) {
+        if (response.ok) {
             setName('')
             setDescription('')
             setAddress('')
             setHours('')
+            setHappy('')
+            setKitchen('')
             setNumber('')
             setRating('')
+            setWebsite('')
+            setSeating('')
+            setShop('')
+            setSubscription('')
+            setServing('')
+            setGiftCards('')
+            setTravelersChoice('')
             setPricing('')
             setCategory('')
+            setImgURL('')
             setError(null)
             setEmptyFields([])
             console.log('new attraction added!')
-            dispatch({type: 'CREATE_ATTRACTION', payload: json})
+            dispatch({ type: 'CREATE_ATTRACTION', payload: json })
         }
     }
 
@@ -92,6 +112,22 @@ const AttractionForm = () => {
                 className={emptyFields.includes('hours') ? 'error' : ''}
             />
 
+            <label>Happy Hour:</label>
+            <input
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={happy}
+                className={emptyFields.includes('happy') ? 'error' : ''}
+            />
+
+            <label>Kitchen Hours:</label>
+            <input
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={kitchen}
+                className={emptyFields.includes('kitchen') ? 'error' : ''}
+            />
+
             <label>Phone Number:</label>
             <input
                 type="number"
@@ -108,10 +144,66 @@ const AttractionForm = () => {
                 className={emptyFields.includes('rating') ? 'error' : ''}
             />
 
+            <label>Website:</label>
+            <input
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={website}
+                className={emptyFields.includes('website') ? 'error' : ''}
+            />
+
+            <label>Seating:</label>
+            <input
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={seating}
+                className={emptyFields.includes('seating') ? 'error' : ''}
+            />
+
+            <label>Online Shop:</label>
+            <input
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={shop}
+                className={emptyFields.includes('shop') ? 'error' : ''}
+            />
+
+            <label>Club Subscription:</label>
+            <input
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={subscription}
+                className={emptyFields.includes('subscription') ? 'error' : ''}
+            />
+
+            <label>Serving Options:</label>
+            <input
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={serving}
+                className={emptyFields.includes('serving') ? 'error' : ''}
+            />
+
+            <label>Gift Cards:</label>
+            <input
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={giftCards}
+                className={emptyFields.includes('giftCards') ? 'error' : ''}
+            />
+
+            <label>Traveler's Choice:</label>
+            <input
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={travelersChoice}
+                className={emptyFields.includes('travelersChoice') ? 'error' : ''}
+            />
+
             <label>Price Range:</label>
             <input
-                type="number"
-                onChange={(e) => setPricing(e.target.value)}
+                type="text"
+                onChange={(e) => setName(e.target.value)}
                 value={pricing}
                 className={emptyFields.includes('pricing') ? 'error' : ''}
             />
@@ -119,14 +211,22 @@ const AttractionForm = () => {
             <label>Category:</label>
             <input
                 type="text"
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
                 value={category}
                 className={emptyFields.includes('category') ? 'error' : ''}
+            />
+
+            <label>Picture Time!:</label>
+            <input
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={imgURL}
+                className={emptyFields.includes('imgURL') ? 'error' : ''}
             />
             <button>Add Attraction</button>
             {error && <div className='error'>{error}</div>}
         </form>
-    )
-}
+    );
+};
 
 export default AttractionForm

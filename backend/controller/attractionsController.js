@@ -33,7 +33,7 @@ const getAttraction = async (req, res) => {
 
 //create a new attraction
 const createAttraction = async (req,res) =>{
-    const {name, description, reservation, address, hours, happy, number, rating, website, seating, events, shop, subscription, serving, kitchen, giftCards, travelersChoice, pricing, category} = req.body
+    const {name, description,imgURL, address, hours, happy, number, rating, website, seating, shop, subscription, serving, kitchen, giftCards, travelersChoice, pricing, category} = req.body
 
 
     let emptyFields = []
@@ -42,12 +42,12 @@ const createAttraction = async (req,res) =>{
         emptyFields.push('name')
     }
 
-    if(!description) {
-        emptyFields.push('description')
+    if(!imgURL) {
+        emptyFields.push('imgURL')
     }
 
-    if(!reservation) {
-        emptyFields.push('reservation')
+    if(!description) {
+        emptyFields.push('description')
     }
 
     if(!address) {
@@ -76,10 +76,6 @@ const createAttraction = async (req,res) =>{
 
     if(!seating) {
         emptyFields.push('seating')
-    }
-
-    if(!events) {
-        emptyFields.push('events')
     }
 
     if(!shop) {
@@ -115,13 +111,13 @@ const createAttraction = async (req,res) =>{
     }
 
     //makes it so user fills out all fields
-    if(emptyFields.length > 0) {
-        return res.status(400).json({error: 'Please fill in all fields', emptyFields})
-    }
+    // if(emptyFields.length > 0) {
+    //     return res.status(400).json({error: 'Please fill in all fields', emptyFields})
+    // }
 
     //add to db
       try{
-          const attraction = await Attraction.create({name, description, address, hours, number, rating, pricing, category})
+          const attraction = await Attraction.create({name, description, imgURL,  address, hours, happy, kitchen, website, seating, shop, subscription, serving, giftCards, travelersChoice, number, rating, pricing, category})
           res.status(200).json(attraction)
       } catch (error) {
           res.status(400).json({error: error.message})
